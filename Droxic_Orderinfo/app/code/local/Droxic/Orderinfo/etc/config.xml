@@ -35,16 +35,4 @@
             </sales_order_place_after>
         </events>
     </global>
-    <frontend>
-        <events>
-            <checkout_onepage_controller_success_action>
-                <observers>
-                    <droxic_orderinfo>
-                        <class>droxic_orderinfo/observer</class>
-                        <method>newCustomer</method>
-                    </droxic_orderinfo>
-                </observers>
-            </checkout_onepage_controller_success_action>
-        </events>
-    </frontend>
 </config>
