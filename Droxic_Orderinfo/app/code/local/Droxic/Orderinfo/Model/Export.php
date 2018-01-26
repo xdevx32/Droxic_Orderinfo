@@ -5,18 +5,11 @@ class Droxic_Orderinfo_Model_Export
 
     public function exportOrder($order) 
     {
-        $dirPath = Mage::getBaseDir('var') . DS . 'acho';
-        
-        //if the export directory does not exist, create it
-        if (!is_dir($dirPath)) {
-            mkdir($dirPath, 0777, true);
-        }
-
         $json = array(
               'order_id' => $order->getData('increment_id'),
               'order_data' => array(
                 'order_status' => $order->getData('status'),
-                'number_of_items' => $order->getData('total_qty_ordered'), //payment method is missing
+                'number_of_items' => $order->getData('total_qty_ordered'), 
                 'sub_total' => $order->getData('subtotal'),
                 'discount' => $order->getData('discount_amount'),
                 'grand_total' => $order->getData('grand_total')
@@ -32,7 +25,7 @@ class Droxic_Orderinfo_Model_Export
 
 
         $myJson = json_encode($json);
-        /*
+        
         $url = Mage::getStoreConfig('catalog/backend/droxic_api_url');
 
         $ch = curl_init();
@@ -43,11 +36,7 @@ class Droxic_Orderinfo_Model_Export
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response  = curl_exec($ch);
         curl_close($ch);
-        */
-        file_put_contents(
-            $dirPath. DS .$order->getIncrementId().'.json', 
-            $myJson
-        );
+        
         
         return true;
     }
